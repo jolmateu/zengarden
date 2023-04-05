@@ -1,0 +1,389 @@
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Open+Sans&display=swap');
+
+$background-color: white;
+$primary: #ffbe0b;
+$accent1: #fb5607;
+$accent2 : #ff006e;
+$accent3 : #8338ec;
+$accent4 : #3a86ff;
+$font-body : 'Open Sans', cursive;
+$font-headline : 'Bubblegum Sans', sans-serif;
+$text-light : #fff;
+$text-dark : #000;
+$border-dark : #000;
+$break-small: 20em;
+$break-medium: 640px;
+$break-large: 60em;
+
+@mixin center($width, $max-width: 960px) {
+    width: $width;
+    max-width: $max-width;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin breakpoint($break) {
+    @if $break == large {
+    @media (max-width: $break-large) { @content; }
+    }
+    @else if $break == medium {
+    @media (max-width: $break-medium) { @content; }
+    }
+    @else if $break == small {
+    @media (max-width: $break-small) { @content; }
+    } @else {
+    @media ($break) { @content; }
+    }
+}  
+
+body {
+    font-family: $font-body;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: $font-headline;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3em;
+    /* color: $text-light;
+    background-color: $primary;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 1rem;
+    border-style: solid;
+    border-color: $border-dark;
+    -webkit-text-stroke: 0.5px black; */
+}
+
+h2 {
+    font-size: 1.5em;
+    text-transform: uppercase;
+    /* text-align: center; */
+}
+
+h3 {
+    font-size: 1.3em;
+    color: $text-dark;
+}
+
+abbr {
+    text-decoration: underline wavy $accent3;
+    color: $accent4;
+    font-weight: bold;
+}
+
+a {
+    color: $accent2;
+    text-decoration: none;
+    transition: 0.2s ease-in-out;
+}
+
+a:hover {
+    color: $accent4;
+    
+}
+
+.page-wrapper {
+    display: grid;
+}
+
+header {
+    background: #000;
+    color:$text-light;
+    padding: 20px;
+    text-align: center;
+    border-radius: 20px 20px 0px 0px;
+}
+
+.summary {
+    background: #000;
+    color:$text-light;
+    text-align: center;
+}
+
+.intro {
+    display: grid;
+    grid-template-rows: 1fr, 1fr, 2fr;
+}
+
+.summary, .preamble {
+    padding: 20px;
+}
+
+.preamble {
+    background: $primary;
+    color: $text-light;
+    h3 {
+        color: $text-light;
+        font-size: 2.5rem;
+        opacity: 1;
+    }
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 500px, 20px;
+    @include breakpoint(medium) { 
+        display: block;
+    }
+}
+
+.main > div {
+    padding: 20px;
+    color: $text-light;
+    height: auto;
+    box-shadow: -24px 0px 21px -3px rgba(0,0,0,0.1);
+}
+
+.main [role=article] > h3 {
+    color: #fff;
+    font-size: 3rem;
+    writing-mode: tb-rl;
+    position: relative;
+    left: 0;
+    opacity: 0.8;
+}
+
+.main > [role=article] > p {
+    display: none;
+}
+
+.explanation {
+    background-color: $accent1;
+}
+
+.participation {
+    background-color: $accent2;
+}
+
+.benefits {
+    background-color: $accent3;
+}
+
+.requirements {
+    background-color: $accent4;
+}
+
+:where(.explanation, .participation, .benefits, .requirements) {
+    transition: 300ms;
+}
+
+:where(.explanation, .participation, .benefits, .requirements):hover {
+    background: $text-dark;
+}
+
+.main:has(.explanation:hover){
+    grid-template-columns: 2.5fr 0.5fr 0.5fr 0.5fr;
+    .explanation > h3 {
+        writing-mode: horizontal-tb;
+    }
+    .explanation > p {
+        display: block;
+    }
+}
+
+.main:has(.participation:hover){
+    grid-template-columns: 0.5fr 2.5fr 0.5fr 0.5fr;
+    .participation > h3 {
+        writing-mode: horizontal-tb;
+    }
+    .participation > p {
+        display: block;
+    }
+}
+
+.main:has(.benefits:hover){
+    grid-template-columns: 0.5fr 0.5fr 2.5fr 0.5fr;
+    .benefits > h3 {
+        writing-mode: horizontal-tb;
+    }
+    .benefits > p {
+        display: block;
+    }
+}
+
+.main:has(.requirements:hover){
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 2.5fr;
+    .requirements > h3 {
+        writing-mode: horizontal-tb;
+    }
+    .requirements > p {
+        display: block;
+    }
+}
+
+footer {
+    background: rgb(251,86,7);
+    background: linear-gradient(90deg, rgba(251,86,7,1) 0%, rgba(255,0,110,1) 33%, rgba(131,56,236,1) 66%, rgba(58,134,255,1) 100%);
+    grid-column: span 4;
+    height: 50px;
+    color: $text-light;
+    text-align: center;
+    padding-top: 30px;
+    a {
+        padding: 10px 20px 10px 20px;
+        color: $text-light;
+        border: 2px solid rgba(0, 0, 0, 0.2);
+        text-decoration: none;
+        transition: border-color 0.2s ease-in-out;
+    }
+    a:hover{
+        border-color: $primary;
+        color: $text-light;
+    }
+    @include breakpoint(medium) { 
+        padding-top: 0px;
+        display:flex;
+    }
+    
+}
+
+.wrapper {
+    display: grid;
+    grid-template-rows: 2fr 0.5fr 0.5fr;
+    /* justify-items: center; */
+    background: $text-light;
+    border-radius: 0px 0px 20px 20px;
+    .zen-resources {
+        background: $text-dark;
+        border-radius: 0px 0px 20px 20px;
+    }
+    font-size: 0.8rem;
+}
+
+nav ul, ul {
+    list-style: none;
+    text-align: center;
+}
+
+nav ul li a, ul li a {
+    text-decoration: none;    
+}
+
+.design-selection nav {
+    display: grid;
+    justify-items: center;
+}
+
+.design-selection nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    @include breakpoint(medium) { 
+        grid-template-columns: repeat(1, 1fr);
+        height: auto;
+    }
+}
+
+.design-selection nav ul li {
+    border: 2px solid $primary;
+    padding: 10px;
+    align-self: center;
+    margin: 5px;
+    color: $primary;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.design-selection nav ul li a {
+    color: $text-dark
+}
+
+.design-selection nav ul li:hover {
+    border: 2px dotted $text-light;
+}
+
+[role=navigation] a:nth-child(1)::after {
+    content: "\A";
+    white-space: pre-wrap;
+}
+
+[role=navigation] a:nth-child(2) {
+    color: $accent1;
+}
+
+.design-selection {
+    margin: 20px;
+}
+
+.design-selection h3 {
+    color: rgb(148, 146, 146);
+    font-size: 1.4rem;
+}
+
+.design-archives {
+    justify-self: end;
+}
+
+.design-archives nav ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0px 20px;
+}
+
+.design-archives nav ul li {
+    background: $primary;
+    padding: 10px;
+    transition: 0.2s ease-in-out;
+}
+
+.design-archives nav ul li:hover {
+    background: $text-dark;
+}
+
+.design-archives nav ul li a{
+    color: $text-dark;
+    font-family: $font-headline;
+}
+
+.design-archives nav ul li a:hover{
+    color: $primary;
+}
+
+.design-archives h3,
+.zen-resources h3 {
+    display: none;
+}
+
+.zen-resources {
+    margin: 20px 0px;
+    display: grid;
+    grid-template-rows: repeat(1, 1fr);
+}
+
+.zen-resources ul {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-items: stretch;
+    align-items: stretch;
+    margin: 0px;
+    padding: 10px 0px;
+    @include breakpoint(medium) { 
+        display: block;
+    }
+}
+
+.zen-resources ul li {
+    transition: 0.2s ease-in-out;
+}
+
+.zen-resources ul li:hover,
+.zen-resources ul li a:hover{
+    text-decoration: underline $accent3;
+    color: $primary;
+}
+
+.zen-resources ul li a {
+    color: $text-light;
+    font-size: 0.8rem;
+    padding: 0px 10px;
+}
+
+.zen-resources ul li a abbr {
+   text-decoration: none; 
+}
+
